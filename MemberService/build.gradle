@@ -26,12 +26,35 @@ ext {
 }
 
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // redis 설정 및 Redis Cache
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+
     compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'com.mysql:mysql-connector-j'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+
+    //jwt 설정
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
+    implementation 'io.jsonwebtoken:jjwt-impl:0.12.3'
+    implementation 'io.jsonwebtoken:jjwt-jackson:0.12.3'
+
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'com.google.code.gson:gson:2.7' //test에서 사용
+    implementation 'org.springframework.boot:spring-boot-starter-validation'// valid 유효성 검사
+    implementation 'javax.validation:validation-api:2.0.1.Final'
+    implementation 'org.slf4j:slf4j-api:2.0.3' //logging
+
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
