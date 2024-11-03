@@ -53,17 +53,14 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         refreshTokenRepository.save(refreshToken);
 
         response.addCookie(createCookie("Refresh_Token", refresh));
-
-        // 로그인 성공 후 프론트엔드로 리다이렉트하면서 Access_Token 전달
-        String redirectUrl = "http://localhost:3000?Access_Token=" + access + "&Refresh_Token=" + refresh;
-        getRedirectStrategy().sendRedirect(request, response, redirectUrl);
+        getRedirectStrategy().sendRedirect(request, response, "http://localhost:3000?Access_Token="+access);
     }
 
 
     private Cookie createCookie(String key, String value) {
         Cookie cookie = new Cookie(key, value);
         cookie.setMaxAge(60*60*6); // 6시간
-        //cookie.setSecure(true); // 로컬 개발시에는 이 라인을 주석 처리, 프로덕션에서는 유지
+        cookie.setSecure(true); // 로컬 개발시에는 이 라인을 주석 처리, 프로덕션에서는 유지
         cookie.setPath("/");
         cookie.setHttpOnly(true);
         cookie.setAttribute("SameSite", "None");
