@@ -13,7 +13,7 @@ public class GatewayFilter {
     @Bean
     public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route(r -> r.path("/oauth2/**", "/login/oauth2/code/**", "/logout/**", "/api/member/**", "/member/**")
+                .route(r -> r.path("/oauth2/**", "/login/oauth2/code/**", "/logout/**", "/api/member/**", "/member/**", "/reissue")
                         .uri("lb://MEMBER"))
                 .build();
     }

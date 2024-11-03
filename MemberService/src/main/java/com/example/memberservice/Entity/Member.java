@@ -1,5 +1,6 @@
 package com.example.memberservice.Entity;
 
+import com.example.memberservice.DTO.MemberDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -58,6 +59,17 @@ public class Member {
         this.name = name;
         this.profileImage = profileImage;
         this.introduce = introduce;
+    }
+
+    public MemberDTO toMemberDTO(){
+        MemberDTO memberDTO = new MemberDTO();
+        memberDTO.setMemberId(this.memberId);
+        memberDTO.setName(this.name);
+        memberDTO.setProfileImage(this.profileImage);
+        memberDTO.setEmail(this.email);
+        memberDTO.setRole(this.getRoleKey());
+        memberDTO.setIntroduce(this.introduce);
+        return memberDTO;
     }
 
     @Builder
