@@ -27,8 +27,6 @@ public class TeamQueryDSLImpl implements TeamQueryDSL {
         return queryFactory
                 .selectFrom(team)
                 .leftJoin(team.tier, tier).fetchJoin()
-//                .leftJoin(team.teamMembers, teamMember).fetchJoin()
-//                .leftJoin(teamMember.member, member).fetchJoin()
                 .where(team.teamName.eq(teamName))
                 .fetchOne();
     }

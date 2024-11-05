@@ -17,8 +17,8 @@ public class TeamInfoDTO {
     private String introduce;
     private LocalDateTime lastMatchDate;
 
-//    //팀 회원
-//    private TeamMemberListDTO teamMemberListDTO;
+    //팀 회원
+    private TeamMemberListDTO teamMemberListDTO;
 //    //팀 리뷰
 //    private TeamReviewListDTO teamReviewListDTO;
 //    //매치

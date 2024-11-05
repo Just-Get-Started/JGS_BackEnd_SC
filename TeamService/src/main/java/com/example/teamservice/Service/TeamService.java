@@ -7,6 +7,7 @@ import com.example.teamservice.Entity.Team;
 import com.example.teamservice.Entity.Tier;
 import com.example.teamservice.Exception.BusinessLogicException;
 import com.example.teamservice.Exception.TeamExceptionType;
+import com.example.teamservice.OpenFeign.OpenAiFeignClient;
 import com.example.teamservice.Repository.TeamRepository;
 import org.springframework.cache.annotation.Cacheable;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ import java.util.List;
 public class TeamService {
     private final TeamRepository teamRepository;
     private final TierService tierService;
+    private final OpenAiFeignClient openAiFeignClient;
 
     @Transactional(readOnly = true)
     public PagingResponseDTO<TeamDTO> findAll(int page, int size, String keyword, String tier) {
@@ -49,7 +51,12 @@ public class TeamService {
     public TeamInfoDTO findByTeamName(String teamName) {
         Team team = teamRepository.findByTeamName(teamName);
         validateTeamExists(team, teamName);
-        return team.toTeamInfoDTO();
+        
+        //여기에서 하나씩 추가로 설정
+        TeamInfoDTO teamInfoDTO = new TeamInfoDTO();
+        teamInfoDTO.setTeamMemberListDTO(openAiFeignClient.findTeamMembersByTeamName(teamName));
+
+        return teamInfoDTO;
     }
 
 //    @Transactional(readOnly = true)

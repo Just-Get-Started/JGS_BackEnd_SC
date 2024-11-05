@@ -1,6 +1,8 @@
 package com.example.teamservice.Entity;
 
+import com.example.teamservice.DTO.Request.TeamMemberDTO;
 import com.example.teamservice.DTO.Response.TeamInfoDTO;
+import com.example.teamservice.DTO.Response.TeamMemberListDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
@@ -62,12 +64,6 @@ public class Team {
         teamInfoDTO.setIntroduce(this.introduce);
         teamInfoDTO.setLastMatchDate(this.lastMatchDate);
 
-//        List<TeamMemberDTO> teamMemberDTOS = this.teamMembers.stream()
-//                .map(TeamMember::toTeamMemberDTO)
-//                .collect(Collectors.toList());
-//        TeamMemberListDTO teamMemberListDTO = new TeamMemberListDTO();
-//        teamMemberListDTO.setTeamMemberDTOList(teamMemberDTOS);
-//        teamInfoDTO.setTeamMemberListDTO(teamMemberListDTO);
 //
 //        List<TeamReviewDTO> teamReviewDTOS = this.teamReviews.stream()
 //                .map(TeamReview::toTeamReviewDTO)
