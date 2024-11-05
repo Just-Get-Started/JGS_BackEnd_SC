@@ -1,4 +1,4 @@
-package com.example.gateway.Config.JWT;
+package com.example.gateway.JWT;
 
 import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;

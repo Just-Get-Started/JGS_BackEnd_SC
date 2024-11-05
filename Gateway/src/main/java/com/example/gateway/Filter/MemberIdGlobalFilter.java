@@ -1,6 +1,6 @@
-package com.example.gateway.Config;
+package com.example.gateway.Filter;
 
-import com.example.gateway.Config.JWT.JWTUtil;
+import com.example.gateway.JWT.JWTUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GlobalFilter;

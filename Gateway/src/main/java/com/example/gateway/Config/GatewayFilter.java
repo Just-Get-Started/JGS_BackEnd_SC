@@ -15,6 +15,8 @@ public class GatewayFilter {
         return builder.routes()
                 .route(r -> r.path("/oauth2/**", "/login/oauth2/code/**", "/logout/**", "/api/member/**", "/member/**", "/reissue")
                         .uri("lb://MEMBER"))
+                .route(r -> r.path("/team/**", "/api/team/**")
+                        .uri("lb://TEAM"))
                 .build();
     }
 }

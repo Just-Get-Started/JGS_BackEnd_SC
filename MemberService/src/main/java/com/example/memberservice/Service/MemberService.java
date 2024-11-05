@@ -38,10 +38,10 @@ public class MemberService {
         return member.map(Member::toMemberDTO).orElse(null);
     }
 
-    @Transactional(readOnly = true)
-    public Member findByIdReturnEntity(Long id){
-        return getMemberById(id).get();
-    }
+//    @Transactional(readOnly = true)
+//    public Member findByIdReturnEntity(Long id){
+//        return getMemberById(id).get();
+//    }
 
     private Optional<Member> getMemberById(Long id){
         Optional<Member> member = memberRepository.findById(id);
