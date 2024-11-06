@@ -16,7 +16,7 @@ services:
     container_name: Kafka00Container
     hostname: Kafka00Service
     ports:
-      - '10000:9094'
+      - '10000:9094'  # External port for Kafka broker 0
     environment:
       - KAFKA_CFG_BROKER_ID=0
       - KAFKA_CFG_NODE_ID=0
@@ -25,7 +25,7 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
       - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
       - KAFKA_CFG_LISTENERS=PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093,EXTERNAL://0.0.0.0:9094
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://Kafka00Service:9092,EXTERNAL://Kafka00Service:9094
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://Kafka00Service:9092,EXTERNAL://localhost:10000
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
       - KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR=3
       - KAFKA_CFG_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=3
@@ -43,7 +43,7 @@ services:
     container_name: Kafka01Container
     hostname: Kafka01Service
     ports:
-      - '10001:9094'
+      - '10001:9094'  # External port for Kafka broker 1
     environment:
       - KAFKA_CFG_BROKER_ID=1
       - KAFKA_CFG_NODE_ID=1
@@ -52,7 +52,7 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
       - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
       - KAFKA_CFG_LISTENERS=PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093,EXTERNAL://0.0.0.0:9094
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://Kafka01Service:9092,EXTERNAL://Kafka01Service:9094
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://Kafka01Service:9092,EXTERNAL://localhost:10001
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
       - KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR=3
       - KAFKA_CFG_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=3
@@ -70,7 +70,7 @@ services:
     container_name: Kafka02Container
     hostname: Kafka02Service
     ports:
-      - '10002:9094'
+      - '10002:9094'  # External port for Kafka broker 2
     environment:
       - KAFKA_CFG_BROKER_ID=2
       - KAFKA_CFG_NODE_ID=2
@@ -79,7 +79,7 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
       - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
       - KAFKA_CFG_LISTENERS=PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093,EXTERNAL://0.0.0.0:9094
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://Kafka02Service:9092,EXTERNAL://Kafka02Service:9094
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://Kafka02Service:9092,EXTERNAL://localhost:10002
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
       - KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR=3
       - KAFKA_CFG_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=3
@@ -96,7 +96,7 @@ services:
     restart: always
     container_name: KafkaWebUiContainer
     ports:
-      - '8085:8080' # 호스트의 8085 포트를 컨테이너의 8080 포트에 바인딩
+      - '8085:8080'  # External port for the Kafka UI
     environment:
       - KAFKA_CLUSTERS_0_NAME=Local-Kraft-Cluster
       - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=Kafka00Service:9092,Kafka01Service:9092,Kafka02Service:9092

@@ -1,5 +1,6 @@
 package com.example.teamservice.Service;
 
+import com.example.teamservice.DTO.Kafka.KafkaMessage;
 import com.example.teamservice.DTO.Request.TeamRequestDTO;
 import com.example.teamservice.Entity.Team;
 import com.example.teamservice.Entity.Tier;
@@ -10,6 +11,7 @@ import com.example.teamservice.Repository.TeamRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +23,10 @@ import java.time.LocalDate;
 public class APITeamService {
     private final TeamRepository teamRepository;
     private final OpenAiFeignClient openAiFeignClient;
+
+    //Kafka
+    private static final String TOPIC = "team-leader-create";
+    private final KafkaTemplate<String, KafkaMessage<?>> kafkaTemplate;
 
     @Transactional(rollbackFor = Exception.class)
     public void makeTeam(Long memberId, TeamRequestDTO dto){
@@ -40,8 +46,8 @@ public class APITeamService {
                 .build();
         try{
             save(newTeam);
-            //이 부분은 Kafka
-//            apiTeamMemberService.createLeaderTeamMember(memberId, newTeam);
+            // Kafka Message Send
+            kafkaTemplate.send(TOPIC, new KafkaMessage<>(String.valueOf(memberId), dto.teamName()));
         } catch(Exception e){
             log.warn("Create Team Failed : {}", e.getMessage());
             throw new BusinessLogicException(TeamExceptionType.TEAM_SAVE_ERROR);
