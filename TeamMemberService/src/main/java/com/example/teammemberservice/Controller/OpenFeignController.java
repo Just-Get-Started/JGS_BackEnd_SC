@@ -1,7 +1,6 @@
 package com.example.teammemberservice.Controller;
 
 import com.example.teammemberservice.DTO.TeamMemberListDTO;
-import com.example.teammemberservice.Entity.TeamMember;
 import com.example.teammemberservice.Service.APITeamMemberService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -9,12 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 @Validated
-public class TestController {
+public class OpenFeignController {
 
     private final APITeamMemberService apiTeamMemberService;
 
