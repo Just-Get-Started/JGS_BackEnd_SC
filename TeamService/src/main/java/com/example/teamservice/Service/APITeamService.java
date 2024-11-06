@@ -47,6 +47,7 @@ public class APITeamService {
         try{
             save(newTeam);
             // Kafka Message Send
+            log.info("send Message : {}", TOPIC);
             kafkaTemplate.send(TOPIC, new KafkaMessage<>(String.valueOf(memberId), dto.teamName()));
         } catch(Exception e){
             log.warn("Create Team Failed : {}", e.getMessage());

@@ -1,8 +1,9 @@
-package com.example.teammemberservice.Config;
+package com.example.teammemberservice.Config.Kafka;
 
 import com.example.teammemberservice.DTO.Kafka.KafkaMessage;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -20,10 +21,16 @@ import java.util.Map;
 @Configuration
 public class KafkaConsumerConfig {
 
+    @Value("${Kafka_Url}")
+    private String url;
+
+    @Value("${Kafka_Message_TeamMember_Service_Package}")
+    private String kafkaMessagePackage;
+
     @Bean
     public ConsumerFactory<String, KafkaMessage<?>> consumerFactory() {
         Map<String, Object> configProps = new HashMap<>();
-        configProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:10000");  // Kafka 서버 주소
+        configProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, url);  // Kafka 서버 주소
         configProps.put(ConsumerConfig.GROUP_ID_CONFIG, "team-member-group");
 
         // Key Deserializer는 StringDeserializer로 설정
@@ -37,7 +44,7 @@ public class KafkaConsumerConfig {
         configProps.put(JsonDeserializer.TRUSTED_PACKAGES, "*");  // 모든 패키지 허용
         configProps.put(JsonDeserializer.VALUE_DEFAULT_TYPE, KafkaMessage.class.getName());  // 역직렬화할 타입 지정
         // TYPE_MAPPINGS를 사용하여 패키지 간 클래스 매핑
-        configProps.put(JsonSerializer.TYPE_MAPPINGS, "KafkaMessage:com.example.teammemberservice.DTO.Kafka.KafkaMessage");
+        configProps.put(JsonSerializer.TYPE_MAPPINGS, kafkaMessagePackage);
 
         return new DefaultKafkaConsumerFactory<>(configProps);
     }

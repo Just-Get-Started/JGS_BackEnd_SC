@@ -1,6 +1,7 @@
-package com.example.teamservice.Config;
+package com.example.teammemberservice.Config.Kafka;
 
-import com.example.teamservice.DTO.Kafka.KafkaMessage;
+import com.example.teammemberservice.DTO.Kafka.KafkaMessage;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -16,14 +17,20 @@ import java.util.Map;
 @Configuration
 public class KafkaProducerConfig {
 
+    @Value("${Kafka_Url}")
+    private String url;
+
+    @Value("${Kafka_Message_TeamMember_Service_Package}")
+    private String kafkaMessagePackage;
+
     @Bean
     public ProducerFactory<String, KafkaMessage<?>> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
-        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:10000"); // Kafka 컨테이너 이름 사용
+        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, url); // Kafka 컨테이너 이름 사용
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
         // TYPE_MAPPINGS를 사용하여 패키지 간 클래스 매핑
-        configProps.put(JsonSerializer.TYPE_MAPPINGS, "KafkaMessage:com.example.teamservice.DTO.Kafka.KafkaMessage");
+        configProps.put(JsonSerializer.TYPE_MAPPINGS, kafkaMessagePackage);
         return new DefaultKafkaProducerFactory<>(configProps);
     }
 
@@ -32,3 +39,4 @@ public class KafkaProducerConfig {
         return new KafkaTemplate<>(producerFactory());
     }
 }
+
