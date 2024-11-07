@@ -1,5 +1,8 @@
 package com.example.teamservice.DTO.Response;
 
+import com.example.teamservice.DTO.Response.OpenFeignDTO.MatchListDTO;
+import com.example.teamservice.DTO.Response.OpenFeignDTO.TeamMemberListDTO;
+import com.example.teamservice.DTO.Response.OpenFeignDTO.TeamReviewListDTO;
 import com.example.teamservice.DTO.TierDTO;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,8 +24,8 @@ public class TeamInfoDTO {
     private TeamMemberListDTO teamMemberListDTO;
     //팀 리뷰
     private TeamReviewListDTO teamReviewListDTO;
-//    //매치
-//    private MatchListDTO matchListDTO;
+    //매치
+    private MatchListDTO matchListDTO;
 //    //우승이력(대회)
 //    private ConferenceListDTO conferenceListDTO;
 }

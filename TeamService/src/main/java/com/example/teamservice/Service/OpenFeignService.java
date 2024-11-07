@@ -1,7 +1,8 @@
 package com.example.teamservice.Service;
 
-import com.example.teamservice.DTO.Response.TeamMemberListDTO;
-import com.example.teamservice.DTO.Response.TeamReviewListDTO;
+import com.example.teamservice.DTO.Response.OpenFeignDTO.MatchListDTO;
+import com.example.teamservice.DTO.Response.OpenFeignDTO.TeamMemberListDTO;
+import com.example.teamservice.DTO.Response.OpenFeignDTO.TeamReviewListDTO;
 import com.example.teamservice.OpenFeign.OpenFeignClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,5 +18,9 @@ public class OpenFeignService {
 
     public TeamReviewListDTO getTeamReviewList(String teamName){
         return openFeignClient.findTeamReviewsByTeamName(teamName);
+    }
+
+    public MatchListDTO getMatchList(String teamName){
+        return openFeignClient.findMatchByTeamName(teamName);
     }
 }

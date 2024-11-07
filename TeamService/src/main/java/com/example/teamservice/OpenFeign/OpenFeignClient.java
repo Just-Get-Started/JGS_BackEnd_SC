@@ -1,7 +1,8 @@
 package com.example.teamservice.OpenFeign;
 
-import com.example.teamservice.DTO.Response.TeamMemberListDTO;
-import com.example.teamservice.DTO.Response.TeamReviewListDTO;
+import com.example.teamservice.DTO.Response.OpenFeignDTO.MatchListDTO;
+import com.example.teamservice.DTO.Response.OpenFeignDTO.TeamMemberListDTO;
+import com.example.teamservice.DTO.Response.OpenFeignDTO.TeamReviewListDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -18,5 +19,8 @@ public interface OpenFeignClient {
 
     @GetMapping("/team-review")
     TeamReviewListDTO findTeamReviewsByTeamName(@RequestParam("teamName") String teamName);
+
+    @GetMapping("/match")
+    MatchListDTO findMatchByTeamName(@RequestParam("teamName") String teamName);
 }
 

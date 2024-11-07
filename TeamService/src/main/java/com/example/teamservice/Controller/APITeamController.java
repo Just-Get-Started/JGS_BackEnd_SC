@@ -1,6 +1,6 @@
 package com.example.teamservice.Controller;
 
-import com.example.teamservice.DTO.Request.TeamRequestDTO;
+import com.example.teamservice.DTO.Response.OpenFeignDTO.TeamRequestDTO;
 import com.example.teamservice.Service.APITeamService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

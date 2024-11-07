@@ -1,4 +1,4 @@
-package com.example.teamservice.DTO.Request;
+package com.example.teamservice.DTO.Response.OpenFeignDTO;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;

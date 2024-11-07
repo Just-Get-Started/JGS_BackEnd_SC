@@ -1,7 +1,7 @@
 package com.example.teamservice.Service;
 
 import com.example.teamservice.DTO.Kafka.KafkaMessage;
-import com.example.teamservice.DTO.Request.TeamRequestDTO;
+import com.example.teamservice.DTO.Response.OpenFeignDTO.TeamRequestDTO;
 import com.example.teamservice.Entity.Team;
 import com.example.teamservice.Entity.Tier;
 import com.example.teamservice.Exception.BusinessLogicException;

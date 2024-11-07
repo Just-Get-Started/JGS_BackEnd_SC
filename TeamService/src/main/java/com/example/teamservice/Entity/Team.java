@@ -1,8 +1,6 @@
 package com.example.teamservice.Entity;
 
-import com.example.teamservice.DTO.Request.TeamMemberDTO;
 import com.example.teamservice.DTO.Response.TeamInfoDTO;
-import com.example.teamservice.DTO.Response.TeamMemberListDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
@@ -11,9 +9,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Entity
 @Getter

@@ -1,6 +1,5 @@
-package com.example.teamservice.DTO.Response;
+package com.example.teamservice.DTO.Response.OpenFeignDTO;
 
-import com.example.teamservice.DTO.Request.TeamReviewDTO;
 import lombok.Getter;
 import lombok.Setter;
 

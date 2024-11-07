@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class TeamReview {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "team_review_id")
     private Long teamReviewId;
 
