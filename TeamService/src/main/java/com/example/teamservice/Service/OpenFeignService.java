@@ -13,6 +13,10 @@ import org.springframework.stereotype.Service;
 public class OpenFeignService {
     private final OpenFeignClient openFeignClient;
 
+    public void validateLeaderAuthority(String teamName, String memberId){
+        openFeignClient.validateLeaderAuthority(teamName, memberId);
+    }
+
     public TeamMemberListDTO getTeamMemberList(String teamName){
         return openFeignClient.findTeamMembersByTeamName(teamName);
     }

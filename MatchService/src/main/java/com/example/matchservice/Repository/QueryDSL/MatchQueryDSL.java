@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface MatchQueryDSL {
     List<MatchDTO> findAllByTeamName(String teamName);
+    MatchDTO findByIdCustom(Long matchId);
 }

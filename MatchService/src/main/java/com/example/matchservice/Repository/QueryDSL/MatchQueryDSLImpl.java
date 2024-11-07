@@ -33,4 +33,20 @@ public class MatchQueryDSLImpl implements MatchQueryDSL {
                 .where(teamNameCondition)
                 .fetch();
     }
+
+    @Override
+    public MatchDTO findByIdCustom(Long matchId){
+        return queryFactory
+                .select(Projections.fields(MatchDTO.class,
+                        match.matchId,
+                        match.matchDate,
+                        match.teamAScore,
+                        match.teamBScore,
+                        match.teamA,
+                        match.teamB,
+                        match.referee))
+                .from(match)
+                .where(match.matchId.eq(matchId))
+                .fetchOne();
+    }
 }

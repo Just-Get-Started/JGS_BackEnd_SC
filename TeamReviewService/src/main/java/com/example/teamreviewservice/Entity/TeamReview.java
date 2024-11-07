@@ -2,6 +2,7 @@ package com.example.teamreviewservice.Entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,7 +28,7 @@ public class TeamReview {
     @Column(name="content")
     private String content;
 
-    @NotBlank
+    @NotNull
     @Column(name="writer")
     private Long writer;
 

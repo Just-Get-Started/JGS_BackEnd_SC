@@ -22,7 +22,7 @@ import java.time.LocalDate;
 @Slf4j
 public class APITeamService {
     private final TeamRepository teamRepository;
-    private final OpenFeignClient openFeignClient;
+    private final OpenFeignService openFeignService;
 
     //Kafka
     private static final String TOPIC = "team-leader-create";
@@ -61,7 +61,7 @@ public class APITeamService {
         Team team = teamRepository.findByTeamName(dto.teamName());
 
         //이 부분은 OpenFeign
-        openFeignClient.validateLeaderAuthority(team.getTeamName(), String.valueOf(memberId));
+        openFeignService.validateLeaderAuthority(team.getTeamName(), String.valueOf(memberId));
 
         team.updateIntroduce(dto.introduce());
     }
