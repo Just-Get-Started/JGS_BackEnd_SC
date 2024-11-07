@@ -11,18 +11,19 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @Validated
+@RequestMapping("/team-member")
 public class OpenFeignController {
 
     private final APITeamMemberService apiTeamMemberService;
 
     @GetMapping("/validate/leader")
-    public boolean testOpenFeignController(@Valid @NotBlank(message = "teamName은 null일 수 없습니다.") @RequestParam("teamName") String teamName,
+    public void testOpenFeignController(@Valid @NotBlank(message = "teamName은 null일 수 없습니다.") @RequestParam("teamName") String teamName,
                                            @Valid @NotBlank(message = "memberId는 null일 수 없습니다.") @RequestHeader("memberId")String memberId){
 
-        return apiTeamMemberService.validateLeaderAuthority(Long.valueOf(memberId), teamName);
+        apiTeamMemberService.validateLeaderAuthority(Long.valueOf(memberId), teamName);
     }
 
-    @GetMapping("/team-member")
+    @GetMapping
     public TeamMemberListDTO findTeamMembersByTeamName(@RequestParam("teamName") String teamName) {
         return apiTeamMemberService.findTeamMembersByTeamName(teamName);
     }

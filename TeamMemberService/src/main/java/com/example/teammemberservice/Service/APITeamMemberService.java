@@ -27,7 +27,7 @@ public class APITeamMemberService {
     private final TeamMemberRepository teamMemberRepository;
 
     @Transactional(rollbackFor = Exception.class)
-    public boolean validateLeaderAuthority(Long memberId, String teamName){
+    public void validateLeaderAuthority(Long memberId, String teamName){
         List<TeamMember> teamMembers = teamMemberRepository.findAllByTeamName(teamName);
         boolean isLeader = teamMembers.stream()
                 .anyMatch(teamMember -> teamMember.getMemberId().equals(memberId) &&
@@ -36,8 +36,6 @@ public class APITeamMemberService {
             log.info("Not Allow Authority");
             throw new BusinessLogicException(TeamMemberExceptionType.TEAM_MEMBER_INVALID_AUTHORITY);
         }
-
-        return true;
     }
 
     @Transactional(readOnly = true)

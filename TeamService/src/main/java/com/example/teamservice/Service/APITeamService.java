@@ -6,7 +6,7 @@ import com.example.teamservice.Entity.Team;
 import com.example.teamservice.Entity.Tier;
 import com.example.teamservice.Exception.BusinessLogicException;
 import com.example.teamservice.Exception.TeamExceptionType;
-import com.example.teamservice.OpenFeign.OpenAiFeignClient;
+import com.example.teamservice.OpenFeign.OpenFeignClient;
 import com.example.teamservice.Repository.TeamRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ import java.time.LocalDate;
 @Slf4j
 public class APITeamService {
     private final TeamRepository teamRepository;
-    private final OpenAiFeignClient openAiFeignClient;
+    private final OpenFeignClient openFeignClient;
 
     //Kafka
     private static final String TOPIC = "team-leader-create";
@@ -61,7 +61,7 @@ public class APITeamService {
         Team team = teamRepository.findByTeamName(dto.teamName());
 
         //이 부분은 OpenFeign
-        openAiFeignClient.validateLeaderAuthority(team.getTeamName(), String.valueOf(memberId));
+        openFeignClient.validateLeaderAuthority(team.getTeamName(), String.valueOf(memberId));
 
         team.updateIntroduce(dto.introduce());
     }

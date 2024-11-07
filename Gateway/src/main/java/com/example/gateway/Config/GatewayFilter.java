@@ -17,6 +17,10 @@ public class GatewayFilter {
                         .uri("lb://MEMBER"))
                 .route(r -> r.path("/team/**", "/api/team/**")
                         .uri("lb://TEAM"))
+                .route(r -> r.path("/team-member/**", "/api/team-member/**")
+                        .uri("lb://TEAMMEMBER"))
+                .route(r -> r.path("/team-review/**", "/api/team-review/**")
+                        .uri("lb://TEAMREVIEW"))
                 .build();
     }
 }

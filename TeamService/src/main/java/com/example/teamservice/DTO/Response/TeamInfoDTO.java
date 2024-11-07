@@ -19,8 +19,8 @@ public class TeamInfoDTO {
 
     //팀 회원
     private TeamMemberListDTO teamMemberListDTO;
-//    //팀 리뷰
-//    private TeamReviewListDTO teamReviewListDTO;
+    //팀 리뷰
+    private TeamReviewListDTO teamReviewListDTO;
 //    //매치
 //    private MatchListDTO matchListDTO;
 //    //우승이력(대회)
