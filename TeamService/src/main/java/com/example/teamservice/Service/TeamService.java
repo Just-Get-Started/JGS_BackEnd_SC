@@ -65,9 +65,10 @@ public class TeamService {
         teamInfoDTO.setLastMatchDate(team.getLastMatchDate());
 
         try{
-//            teamInfoDTO.setTeamMemberListDTO(openFeignService.getTeamMemberList(teamName));
-//            teamInfoDTO.setTeamReviewListDTO(openFeignService.getTeamReviewList(teamName));
+            teamInfoDTO.setTeamMemberListDTO(openFeignService.getTeamMemberList(teamName));
+            teamInfoDTO.setTeamReviewListDTO(openFeignService.getTeamReviewList(teamName));
             teamInfoDTO.setMatchListDTO(openFeignService.getMatchList(teamName));
+            teamInfoDTO.setConferenceListDTO(openFeignService.getConferenceList(teamName));
         } catch(Exception e){
             log.warn("Team을 조회하는데 실패하였습니다. OpenFeign Error");
             throw new BusinessLogicException(TeamExceptionType.TEAM_SEARCH_ERROR);

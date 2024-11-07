@@ -1,5 +1,6 @@
 package com.example.teamservice.OpenFeign;
 
+import com.example.teamservice.DTO.Response.OpenFeignDTO.ConferenceListDTO;
 import com.example.teamservice.DTO.Response.OpenFeignDTO.MatchListDTO;
 import com.example.teamservice.DTO.Response.OpenFeignDTO.TeamMemberListDTO;
 import com.example.teamservice.DTO.Response.OpenFeignDTO.TeamReviewListDTO;
@@ -22,5 +23,8 @@ public interface OpenFeignClient {
 
     @GetMapping("/match")
     MatchListDTO findMatchByTeamName(@RequestParam("teamName") String teamName);
+
+    @GetMapping("/conference")
+    ConferenceListDTO findConferenceByTeamName(@RequestParam("teamName") String teamName);
 }
 

@@ -23,6 +23,8 @@ public class GatewayFilter {
                         .uri("lb://TEAMREVIEW"))
                 .route(r -> r.path("/match/**", "/api/match/**")
                         .uri("lb://MATCH"))
+                .route(r -> r.path("/conference/**", "/api/conference/**")
+                        .uri("lb://CONFERENCE"))
                 .build();
     }
 }

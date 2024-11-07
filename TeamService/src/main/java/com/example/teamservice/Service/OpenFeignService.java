@@ -1,5 +1,6 @@
 package com.example.teamservice.Service;
 
+import com.example.teamservice.DTO.Response.OpenFeignDTO.ConferenceListDTO;
 import com.example.teamservice.DTO.Response.OpenFeignDTO.MatchListDTO;
 import com.example.teamservice.DTO.Response.OpenFeignDTO.TeamMemberListDTO;
 import com.example.teamservice.DTO.Response.OpenFeignDTO.TeamReviewListDTO;
@@ -22,5 +23,9 @@ public class OpenFeignService {
 
     public MatchListDTO getMatchList(String teamName){
         return openFeignClient.findMatchByTeamName(teamName);
+    }
+
+    public ConferenceListDTO getConferenceList(String teamName){
+        return openFeignClient.findConferenceByTeamName(teamName);
     }
 }

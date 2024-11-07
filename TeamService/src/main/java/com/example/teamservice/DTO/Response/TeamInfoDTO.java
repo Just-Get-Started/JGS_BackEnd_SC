@@ -1,5 +1,6 @@
 package com.example.teamservice.DTO.Response;
 
+import com.example.teamservice.DTO.Response.OpenFeignDTO.ConferenceListDTO;
 import com.example.teamservice.DTO.Response.OpenFeignDTO.MatchListDTO;
 import com.example.teamservice.DTO.Response.OpenFeignDTO.TeamMemberListDTO;
 import com.example.teamservice.DTO.Response.OpenFeignDTO.TeamReviewListDTO;
@@ -26,6 +27,6 @@ public class TeamInfoDTO {
     private TeamReviewListDTO teamReviewListDTO;
     //매치
     private MatchListDTO matchListDTO;
-//    //우승이력(대회)
-//    private ConferenceListDTO conferenceListDTO;
+    //우승이력(대회)
+    private ConferenceListDTO conferenceListDTO;
 }
