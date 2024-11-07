@@ -1,5 +1,6 @@
 package com.example.conferenceservice.Entity;
 
+import com.example.conferenceservice.DTO.Request.ConferenceInfoDTO;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,6 +29,16 @@ public class Conference {
 
     @Column(name = "winner_team")
     private String winnerTeam;
+
+    public void updateWinnerTeam(String winnerTeam){
+        this.winnerTeam = winnerTeam;
+    }
+
+    public void updateConferenceInfo(ConferenceInfoDTO conferenceInfoDTO){
+        this.conferenceName = conferenceInfoDTO.conferenceName();
+        this.content = conferenceInfoDTO.content();
+        this.conferenceDate = conferenceInfoDTO.conferenceDate();
+    }
 
     @Builder
     public Conference(String conferenceName, Long organizer, LocalDate conferenceDate, String content, String winnerTeam) {

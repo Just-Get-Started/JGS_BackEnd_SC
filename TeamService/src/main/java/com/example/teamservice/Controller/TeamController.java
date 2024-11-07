@@ -34,4 +34,10 @@ public class TeamController {
             @NotBlank(message = "팀명은 Null일 수 없습니다.") @RequestParam("teamName") String teamName) {
         return ResponseEntity.status(HttpStatus.OK).body(teamService.findByTeamName(teamName));
     }
+
+    @GetMapping("{teamName}")
+    public ResponseEntity<String> isTeamPresent(
+            @NotBlank(message = "팀명은 Null일 수 없습니다.") @PathVariable("teamName") String teamName) {
+        return ResponseEntity.status(HttpStatus.OK).body(teamService.isTeamPresent(teamName));
+    }
 }

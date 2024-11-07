@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -76,6 +77,15 @@ public class TeamService {
 
 
         return teamInfoDTO;
+    }
+
+    public String isTeamPresent(String teamName){
+        Team team = teamRepository.findByTeamName(teamName);
+        if(team != null){
+            return team.getTeamName();
+        } else{
+            throw new BusinessLogicException(TeamExceptionType.TEAM_NOT_FOUND);
+        }
     }
 
 //    @Transactional(readOnly = true)
