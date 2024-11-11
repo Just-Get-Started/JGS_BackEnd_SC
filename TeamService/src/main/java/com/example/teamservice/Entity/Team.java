@@ -45,46 +45,9 @@ public class Team {
         this.introduce = introduce;
     }
 
-//    public void updateTier(Tier tier, int tierPoint){
-//        this.tier = tier;
-//        this.tierPoint = tierPoint;
-//    }
-
-    public TeamInfoDTO toTeamInfoDTO() {
-        TeamInfoDTO teamInfoDTO = new TeamInfoDTO();
-        teamInfoDTO.setTeamName(this.teamName);
-        teamInfoDTO.setTier(this.tier.tierDTO());
-        teamInfoDTO.setCreateDate(this.createDate);
-        teamInfoDTO.setTierPoint(this.tierPoint);
-        teamInfoDTO.setIntroduce(this.introduce);
-        teamInfoDTO.setLastMatchDate(this.lastMatchDate);
-
-//
-//        List<TeamReviewDTO> teamReviewDTOS = this.teamReviews.stream()
-//                .map(TeamReview::toTeamReviewDTO)
-//                .collect(Collectors.toList());
-//        TeamReviewListDTO teamReviewListDTO = new TeamReviewListDTO();
-//        teamReviewListDTO.setTeamReviewDTOList(teamReviewDTOS);
-//        teamInfoDTO.setTeamReviewListDTO(teamReviewListDTO);
-//
-//        List<MatchDTO> matchDTOS = Stream.concat(
-//                        this.gameMatchesAsTeamA.stream(),
-//                        this.gameMatchesAsTeamB.stream()
-//                )
-//                .map(GameMatch::toMatchDTO)
-//                .collect(Collectors.toList());
-//        MatchListDTO matchListDTO = new MatchListDTO();
-//        matchListDTO.setMatches(matchDTOS);
-//        teamInfoDTO.setMatchListDTO(matchListDTO);
-//
-//        List<ConferenceDTO> conferenceDTOS = this.conferences.stream()
-//                .map(Conference::toConferenceDTO)
-//                .collect(Collectors.toList());
-//        ConferenceListDTO conferenceListDTO = new ConferenceListDTO();
-//        conferenceListDTO.setConferenceDTOList(conferenceDTOS);
-//        teamInfoDTO.setConferenceListDTO(conferenceListDTO);
-
-        return teamInfoDTO;
+    public void updateTier(Tier tier, int tierPoint){
+        this.tier = tier;
+        this.tierPoint = tierPoint;
     }
 
     @Builder

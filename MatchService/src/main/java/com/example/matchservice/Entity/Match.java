@@ -36,6 +36,11 @@ public class Match {
     @Column(name = "referee")
     private Long referee;
 
+    public void updateMatchScore(int teamAScore, int teamBScore){
+        this.teamAScore = teamAScore;
+        this.teamBScore = teamBScore;
+    }
+
     @Builder
     public Match(LocalDateTime matchDate, String teamA, String teamB, Long referee) {
         this.matchDate = matchDate;

@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -88,12 +87,12 @@ public class TeamService {
         }
     }
 
-//    @Transactional(readOnly = true)
-//    public Team findByTeamNameReturnEntity(String teamName) {
-//        Team team = teamRepository.findByTeamName(teamName);
-//        validateTeamExists(team, teamName);
-//        return team;
-//    }
+    @Transactional(readOnly = true)
+    public Team findByTeamNameReturnEntity(String teamName) {
+        Team team = teamRepository.findByTeamName(teamName);
+        validateTeamExists(team, teamName);
+        return team;
+    }
 
     private void validateTeamExists(Team team, String teamName) {
         if (team == null) {

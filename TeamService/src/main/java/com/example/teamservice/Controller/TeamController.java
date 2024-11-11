@@ -4,7 +4,6 @@ import com.example.teamservice.DTO.PagingResponseDTO;
 import com.example.teamservice.DTO.Response.TeamInfoDTO;
 import com.example.teamservice.DTO.TeamDTO;
 import com.example.teamservice.Service.TeamService;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
