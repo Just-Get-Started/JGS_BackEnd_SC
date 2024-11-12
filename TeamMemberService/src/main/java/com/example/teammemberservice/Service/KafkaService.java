@@ -3,8 +3,6 @@ package com.example.teammemberservice.Service;
 import com.example.teammemberservice.DTO.Kafka.KafkaMessage;
 import com.example.teammemberservice.Entity.TeamMember;
 import com.example.teammemberservice.Entity.TeamMemberRole;
-import com.example.teammemberservice.Exception.BusinessLogicException;
-import com.example.teammemberservice.Exception.TeamMemberExceptionType;
 import com.example.teammemberservice.Repository.TeamMemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
