@@ -1,4 +1,4 @@
-package com.example.matchservice.OpenFeign;
+package com.example.matchservice.DTO.OpenFeignDTO;
 
 import lombok.Getter;
 import lombok.Setter;

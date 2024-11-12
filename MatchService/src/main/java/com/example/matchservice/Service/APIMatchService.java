@@ -2,12 +2,12 @@ package com.example.matchservice.Service;
 
 import com.example.matchservice.DTO.EnterScoreDTO;
 import com.example.matchservice.DTO.OpenFeignDTO.TeamDTO;
-import com.example.matchservice.DTO.PagingResponseDTO;
 import com.example.matchservice.Entity.Match;
 import com.example.matchservice.Exception.BusinessLogicException;
 import com.example.matchservice.Exception.MatchExceptionType;
-import com.example.matchservice.OpenFeign.UpdateTierPointDTO;
+import com.example.matchservice.DTO.OpenFeignDTO.UpdateTierPointDTO;
 import com.example.matchservice.Repository.MatchRepository;
+import com.example.matchservice.Service.Kafka.KafkaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -35,10 +35,18 @@ public class APIMatchService {
         TeamDTO teamB = openFeignService.getTeamInfoDTO(match.getTeamB()).content().get(0);
 
         // 결과에 따라 점수를 변경하는 알고리즘
-        updateTierPoints(teamA, teamB, match.getTeamAScore(), match.getTeamBScore());
+        updateTierPoints(match.getMatchId(), teamA, teamB, match.getTeamAScore(), match.getTeamBScore());
     }
 
-    private void updateTierPoints(TeamDTO teamA, TeamDTO teamB, int ATeamScore, int BTeamScore) {
+    @Transactional(rollbackFor = Exception.class)
+    public void rollbackMatchScore(Long matchId){
+        Match match = matchRepository.findById(matchId)
+                .orElseThrow(() -> new BusinessLogicException(MatchExceptionType.MATCH_NOT_FOUND));
+
+        match.updateMatchScore(0, 0);
+    }
+
+    private void updateTierPoints(Long matchId, TeamDTO teamA, TeamDTO teamB, int ATeamScore, int BTeamScore) {
         //Team name으로 TeamDTO OpenFeign으로 가져와서 OpenFeign으로 요청 보내야될듯
         Long teamATier = teamA.getTier().getTierId();
         int teamAPoints = teamA.getTierPoint();
@@ -127,7 +135,7 @@ public class APIMatchService {
         updateTierPoint.setTeamBName(teamB.getTeamName());
         updateTierPoint.setTeamBTierPoint(teamBPoints);
         updateTierPoint.setTeamBTierId(teamBTier);
-        kafkaService.updateTierPoint(updateTierPoint);
+        kafkaService.updateTierPoint(matchId, updateTierPoint);
     }
 
 
