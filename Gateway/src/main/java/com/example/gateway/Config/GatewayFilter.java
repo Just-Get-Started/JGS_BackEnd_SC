@@ -27,6 +27,8 @@ public class GatewayFilter {
                         .uri("lb://CONFERENCE"))
                 .route(r -> r.path("/image/**", "/api/image/**", "/community/**", "/api/community/**")
                         .uri("lb://COMMUNITY"))
+                .route(r -> r.path("/fcm/**", "/api/fcm/**")
+                        .uri("lb://FCM"))
                 .build();
     }
 }
