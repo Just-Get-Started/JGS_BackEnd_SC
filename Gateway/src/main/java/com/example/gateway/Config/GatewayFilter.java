@@ -29,6 +29,8 @@ public class GatewayFilter {
                         .uri("lb://COMMUNITY"))
                 .route(r -> r.path("/fcm/**", "/api/fcm/**")
                         .uri("lb://FCM"))
+                .route(r -> r.path("/api/sse/**")
+                        .uri("lb://SSE"))
                 .build();
     }
 }
