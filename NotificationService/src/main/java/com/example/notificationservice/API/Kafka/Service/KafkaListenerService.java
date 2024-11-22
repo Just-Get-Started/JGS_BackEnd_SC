@@ -1,5 +1,6 @@
-package com.example.notificationservice.API.Notification.Service;
+package com.example.notificationservice.API.Kafka.Service;
 
+import com.example.notificationservice.API.Notification.Service.APINotificationService;
 import com.example.notificationservice.CommonDTO.Kafka.KafkaMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

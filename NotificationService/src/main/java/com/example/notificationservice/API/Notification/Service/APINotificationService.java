@@ -1,5 +1,6 @@
 package com.example.notificationservice.API.Notification.Service;
 
+import com.example.notificationservice.API.Kafka.Service.KafkaService;
 import com.example.notificationservice.API.Notification.DTO.Response.NotificationDTO;
 import com.example.notificationservice.API.Notification.DTO.Response.NotificationListDTO;
 import com.example.notificationservice.API.Notification.Entity.Notification;

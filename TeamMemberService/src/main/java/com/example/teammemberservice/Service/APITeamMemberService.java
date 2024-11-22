@@ -22,6 +22,35 @@ import java.util.Objects;
 public class APITeamMemberService {
 
     private final TeamMemberRepository teamMemberRepository;
+    private final KafkaService kafkaService;
+
+    @Transactional(rollbackFor = Exception.class)
+    public void createLeaderTeamMember(Long memberId, String teamName){
+        TeamMember teamMember = TeamMember.builder()
+                .memberId(memberId)
+                .teamName(teamName)
+                .role(TeamMemberRole.Leader)
+                .build();
+        try{
+            teamMemberRepository.save(teamMember);
+        } catch(Exception e){
+            log.warn("팀 리더 생성 실패로 인한 보상 트랜잭션 실행");
+            kafkaService.sendTeamLeaderCreateRollbackEvent(memberId, teamName);
+        }
+    }
+
+    public void createTeamMember(Long memberId, String teamName){
+        TeamMember teamMember = TeamMember.builder()
+                .memberId(memberId)
+                .teamName(teamName)
+                .role(TeamMemberRole.Member)
+                .build();
+        try{
+            teamMemberRepository.save(teamMember);
+        } catch(Exception e){
+            log.warn("팀 멤버 생성 실패");
+        }
+    }
 
     @Transactional(rollbackFor = Exception.class)
     public void validateLeaderAuthority(Long memberId, String teamName){
@@ -75,6 +104,31 @@ public class APITeamMemberService {
         log.warn("Not Allow Authority - Delete Team Member");
         throw new BusinessLogicException(TeamMemberExceptionType.TEAM_MEMBER_INVALID_AUTHORITY);
     }
+
+    @Transactional(readOnly = true)
+    public void throwIfMemberAlreadyInTeam(String teamName, Long memberId){
+        TeamMemberListDTO teamMemberListDTO = findTeamMembersByTeamName(teamName);
+
+        for(TeamMemberInfoDTO teamMember : teamMemberListDTO.getTeamMemberInfoDTOList()){
+            if(teamMember.getMemberId().equals(memberId)){
+                log.warn("Team Member Already Join");
+                throw new BusinessLogicException(TeamMemberExceptionType.TEAM_MEMBER_ALREADY_JOIN);
+            }
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public Long getLeaderId(String teamName){
+        TeamMemberListDTO teamMemberListDTO = findTeamMembersByTeamName(teamName);
+
+        for(TeamMemberInfoDTO teamMember : teamMemberListDTO.getTeamMemberInfoDTOList()){
+            if(teamMember.getRole().equals(String.valueOf(TeamMemberRole.Leader))){
+                return teamMember.getMemberId();
+            }
+        }
+        throw new BusinessLogicException(TeamMemberExceptionType.TEAM_MEMBER_NOT_FOUND);
+    }
+
 
     private TeamMemberListDTO makeTeamMemberListDTO(List<TeamMember> teamMembers){
         List<TeamMemberInfoDTO> teamMemberInfoDTOS = new ArrayList<>();
